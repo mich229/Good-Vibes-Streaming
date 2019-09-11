@@ -1,5 +1,11 @@
 <?php
-require 'connexion.php';
+require_once 'connexion.php';
+
+if(!isset($_SESSION['id_user'])) {
+    header('location'.$_SESSION['id_user']);
+}
+
+require_once 'functions/functions.php';
 
 ?>
 <!DOCTYPE html>
@@ -11,6 +17,7 @@ require 'connexion.php';
     <link rel="stylesheet" href="assets/css/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/css/animate.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/simple-sidebar.css">
 </head>
 <body id="" class="wow fadeIn">
 
@@ -73,7 +80,7 @@ require 'connexion.php';
                             </div>
 
                             <input type="hidden" id="action" name="action" value="ajout">
-
+                            <input type="hidden" id="id_user" name="id_user">
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
@@ -137,7 +144,6 @@ require 'connexion.php';
 
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
-<script src="assets/js/gulpfile.js"></script>
 <script src="assets/js/popper.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/wow.min.js"></script>
@@ -232,7 +238,6 @@ require 'connexion.php';
         $('#form_login').submit(function() {
             event.preventDefault();
 
-            //Faire patienter l'utilisateur
             swal({
                 title: '',
                 text: 'Veuillez patienter ...',
@@ -249,7 +254,6 @@ require 'connexion.php';
             //Sérialiser le formulaire
             var form_data = $(this).serialize();
 
-            //Effectuer un appel ajax sur la page de traitement des données
             $.ajax({
                 url:'script_php/script_login.php',
                 method:'post',
@@ -262,7 +266,7 @@ require 'connexion.php';
                     if(data.etat_connexion === "Connexion OK") {
                         swal.close();
 
-                        window.location.href = data.index;
+                        window.location.href ='index.php';
                     }
                     else {
                         swal.close();

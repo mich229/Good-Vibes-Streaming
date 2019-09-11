@@ -1,6 +1,7 @@
 <?php
 require_once '../connexion.php';
-require_once '../functions.php';
+require_once '../functions/functions.php';
+
 print_r($_POST); die;
 
 $tab_retour = array();
@@ -32,8 +33,10 @@ if(isset($_POST['action']) && !empty($_POST['action'])) {
                     ":datenais" => $_POST["datenais"],
                     ":sexe" => $_POST["sexe"],
                     ":ville" => $_POST["ville"],
-                    ":password_user" => $password
+                    ":password" => $password
                 ));
+
+            $id_user = $connect -> lastInsertId();
 
 
             //On met les infos en session

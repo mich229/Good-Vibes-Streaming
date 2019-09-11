@@ -4,32 +4,36 @@ require_once '../functions/functions.php';
 
 //print_r($_POST);
 
-$query = "
-    SELECT * FROM utilisateur
-    WHERE pseudo = :pseudo
-";
-$statement = $connect->prepare($query);
-$statement->execute(
-    array(
-        ':pseudo'	=>	$_POST["login-pseudo"]
-    )
-);
-$count = $statement->rowCount();
-if($count > 0) {
-    $user = $statement -> fetch();
+$data = array();
+if (sizeof($_POST) === 2) {
+    if(!empty($_POST['login-pseudo']) && !empty($_POST['login-password'])) {
 
-    if(password_verify($_POST["login-password"], $user["password_user"])) {
-        if(user_session($connect,$user['id_user'])) {
-            echo json_encode("Connexion OK");
+        $pseudo = htmlspecialchars($_POST['login-pseudo']);
+        $password = htmlspecialchars($_POST['login-password']);
+
+        $utilisateur = $connect-> query("SELECT * FROM utilisateur WHERE pseudo = '". $pseudo ."'")
+                                ->fetch();
+
+        if(!empty($utilisateur)) {
+            if(password_verify($password,$utilisateur["password"])) {
+                if(user_session($connect,$utilisateur["id_user"])) {
+                    $data['type'] = "success";
+                    $data['message'] = "Connexion OK";
+                }
+
+                else {
+                    $data['type'] = "error";
+                    $data['message'] = "Une erreur est survenue lors de la création de votre compte ! Veuillez réessayer";
+                }
+            }
+            else {
+                $data['type'] = "warning";
+                $data['message'] = "Pseudo ou mot de passe incorrect";
+            }
         }
         else {
-            echo json_encode("Une erreur est survenu lors de la tentative de connexion ! Veuillez réessayer");
+            $data['etat_connexion'] = "Vous n'avez pas de compte. Veuillez créer un compte svp !.";
         }
     }
-    else {
-        echo json_encode("Pseudo ou mot de passe incorrect");
-    }
 }
-else {
-    echo json_encode("Pseudo ou mot de passe incorrect");
-}
+echo json_encode($data);

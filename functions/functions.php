@@ -3,7 +3,7 @@
 function user_session($connect,$id_user) {
     try {
 
-        $user_info = $connect -> query("SELECT * FROM utilisateur WHERE  AND utilisateur.id_user = ". $id_user)
+        $user_info = $connect -> query("SELECT * FROM utilisateur WHERE id_user = ". $id_user)
             -> fetch();
 
         if($user_info !== null) {
