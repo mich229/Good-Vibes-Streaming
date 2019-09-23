@@ -1,12 +1,7 @@
 <?php
 require_once 'connexion.php';
 
-if(!isset($_SESSION['id_user'])) {
-    header('location'.$_SESSION['id_user']);
-}
-
 require_once 'functions/functions.php';
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -54,9 +49,13 @@ require_once 'functions/functions.php';
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="sexe" class="col-form-label">Sexe : </label>
-                                        <input type="text" class="form-control" id="sexe" name="sexe" maxlength="1" required>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="sexe" name="sexe" class="custom-control-input" value="M" checked>
+                                        <label class="custom-control-label" for="sexe">M</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="sexe" name="sexe" class="custom-control-input" value="F" checked>
+                                        <label class="custom-control-label" for="sexe">F</label>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -255,7 +254,7 @@ require_once 'functions/functions.php';
             var form_data = $(this).serialize();
 
             $.ajax({
-                url:'script_php/script_login.php',
+                url:"script_php/script_login.php",
                 method:'post',
                 data:form_data,
                 dataType:'json',

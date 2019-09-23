@@ -11,6 +11,10 @@
     padding-bottom: 0;
 }
 
-.btn {
-    margin-bottom:10px;
+#profileDisplay {
+    display: block;
+    height: 210px; width: 50%;
+    margin: 2px auto;
+    padding-top: 2px auto;
+    border-radius: 50%;
 }
