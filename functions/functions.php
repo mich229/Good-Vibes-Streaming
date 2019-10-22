@@ -12,7 +12,6 @@ function user_session($connect,$id_user) {
             $_SESSION['datenais'] = $user_info['datenais'];
             $_SESSION['sexe'] = $user_info['sexe'];
             $_SESSION['ville'] = $user_info['ville'];
-            $_SESSION['password'] = $user_info['password'];
             return true;
         }
         else {

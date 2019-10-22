@@ -17,7 +17,7 @@ require 'functions/functions.php';
 </head>
 <body id="" class="wow fadeIn">
 
-<?php require_once 'header.php'; ?>
+<?php require_once 'header1.php'; ?>
 
 <main id="">
     <div class="card text-center mt-4" style="width: 20rem; margin: 40%; margin-bottom: 2%">
@@ -27,12 +27,11 @@ require 'functions/functions.php';
             <p class="card-text">Date de Naissance: <span class="font-weight-bold text-success"><?= $_SESSION['datenais'] ?></span></p>
             <p class="card-text">Sexe: <span class="font-weight-bold text-success"><?= $_SESSION['sexe'] ?></span></p>
             <p class="card-text">Ville: <span class="font-weight-bold text-success"><?= $_SESSION['ville'] ?></span></p>
-            <p class="card-text">Mot de passe: <span class="font-weight-bold text-success"><?= '<input type="password" readonly class="form-control-plaintext" id="pwd" value="'. $_SESSION['password'] .'">' ?></span></p>
             <a href="#" class="btn btn-primary" id="btn_modifier">Mettre à jour mon profil</a>
         </div>
     </div>
 
-    <div class="modal fade" id="signinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modifModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

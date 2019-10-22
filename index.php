@@ -50,11 +50,11 @@ require_once 'functions/functions.php';
                                 </div>
                                 <div class="col-6">
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="sexe" name="sexe" class="custom-control-input" value="M" checked>
+                                        <input type="radio" name="sexe" class="custom-control-input" value="M" checked>
                                         <label class="custom-control-label" for="sexe">M</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        <input type="radio" id="sexe" name="sexe" class="custom-control-input" value="F" checked>
+                                        <input type="radio" name="sexe" class="custom-control-input" value="F" checked>
                                         <label class="custom-control-label" for="sexe">F</label>
                                     </div>
                                 </div>
@@ -123,7 +123,6 @@ require_once 'functions/functions.php';
                             </div>
                         </div>
 
-                        <input type="hidden" id="connexion" name="action" value="connexion">
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
@@ -229,7 +228,6 @@ require_once 'functions/functions.php';
         $("#btn_form_signup").click (function () {
             //On réinitialise le formulaire*
             $('#form_users')[0].reset();
-            $('#action').val('connexion');
             $('#btn_signup').val("Se connecter");
             $("#signupModal").modal('show');
         });
@@ -262,17 +260,14 @@ require_once 'functions/functions.php';
 
                     console.log(data);
 
-                    if(data.etat_connexion === "Connexion OK") {
-                        swal.close();
+                    if(data.type === "success") {
+                       swal.close();
 
-                        window.location.href ='index.php';
                     }
                     else {
-                        swal.close();
                         swal({
-                            type: 'error',
-                            title: "Oups !",
-                            text: data.etat_connexion,
+                            type: data.type,
+                            text: data.message,
                             width: 300,
                             buttonsStyling: false,
                             confirmButtonClass: "btn btn-primary"

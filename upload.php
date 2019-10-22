@@ -17,30 +17,28 @@ require 'functions/functions.php';
 </head>
 <body id="" class="wow fadeIn">
 
-<?php require_once 'header.php'; ?>
+<?php require_once 'header1.php'; ?>
 
 <main id="">
     <fieldset class="pl-4">
         <form action="" method="post" enctype="multipart/form-data" id="form_upload">
             <legend class="text-secondary text-info">Charger une nouvelle video</legend>
             <div class="form-row">
-                <div class="col-4">
-                    <div class="custom-file">
-                        <input type="file" name="import_file" class="custom-file-input" id="upload_file" lang="fr">
-                        <label class="custom-file-label" for="import_file">Choisir la video</label>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="custom-file">
-                        <input type="file" name="import_poster" class="custom-file-input" id="upload_poster" lang="fr">
-                        <label class="custom-file-label" for="import_poster">Choisir une image Poster</label>
+                <div class="col-4 mr-3">
+                    <div class="form-group">
+                        <label for="import_file">Choisir la video</label>
+                        <input type="file" name="import_file" class="" id="upload_file" lang="fr">
                     </div>
                 </div>
                 <div class="col-4">
                     <div class="form-group">
-                        <label for="categorie">
-                            Catégorie :
-                        </label>
+                        <label for="import_poster">Choisir une image Poster</label>
+                        <input type="file" name="import_poster" class="" id="upload_poster" lang="fr">
+                    </div>
+                </div>
+                <div class="col-3 ml-3">
+                    <div class="form-group">
+                        <label for="categorie">Catégorie :</label>
                         <select name="categorie" id="Liste_categorie" class="custom-select chosen">
                             <option disabled>Choisissez une catégorie</option>
                             <?= list_categorie($connect); ?>
@@ -63,12 +61,19 @@ require 'functions/functions.php';
                         <input type="text" class="form-control mt-1" name="titre" required>
                     </div>
                 </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">75% télécharger... Veuillez patienter</div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <input type="hidden" id="action" name="action" value="ajout">
             <div>
-                <input type="reset" class="btn btn-danger " value="Annuler">
-                <input type="submit" class="btn btn-success fa fa-upload" value="Upload">
+                <input type="reset" class="btn btn-danger" value="Annuler">
+                <input type="submit" class="btn btn-success fa-upload" value="Upload">
             </div>
 
         </form>
@@ -106,7 +111,7 @@ require 'functions/functions.php';
             var form_data = $('#form_upload').serialize();
 
             $.ajax({
-                url:"../script_php/uploaded.php",
+                url:"script_php/uploaded.php",
                 method:"POST",
                 data:form_data,
                 dataType:"json",
@@ -114,7 +119,7 @@ require 'functions/functions.php';
                     swal({
                         title: '',
                         text: 'Veuillez patienter.',
-                        imageUrl: '../assets/images/loader.gif',
+                        imageUrl: 'assets/images/loader.gif',
                         animation: true,
                         width: 300,
                         allowOutsideClick: false,
@@ -137,7 +142,7 @@ require 'functions/functions.php';
                         }).then(function() {
                             window
                                 .location
-                                .href = 'accueil.php';
+                                .href = 'index.php';
                         });
                     }
                     else {
